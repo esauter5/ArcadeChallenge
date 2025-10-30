@@ -1,42 +1,170 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+.arcade-container {
+  min-height: 100vh;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.arcade-header {
   text-align: center;
+  margin-bottom: 2rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.arcade-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 3rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: titleGlow 2s ease-in-out infinite alternate;
 }
 
-@keyframes logo-spin {
+.title-line {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    #ff00ff,
+    #00ffff,
+    #39ff14,
+    #ff00ff
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowShift 3s linear infinite;
+  text-shadow:
+    0 0 20px rgba(255, 0, 255, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes rainbowShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes titleGlow {
   from {
-    transform: rotate(0deg);
+    filter: drop-shadow(0 0 20px #ff00ff) drop-shadow(0 0 30px #00ffff);
   }
   to {
-    transform: rotate(360deg);
+    filter: drop-shadow(0 0 30px #ff00ff) drop-shadow(0 0 50px #00ffff);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+.arcade-subtitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: #ffff00;
+  text-shadow:
+    0 0 10px #ffff00,
+    0 0 20px #ffff00;
+  margin-top: 1.5rem;
+  animation: blink 1.5s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
   }
 }
 
-.card {
-  padding: 2em;
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 0, 255, 0.2);
 }
 
-.read-the-docs {
-  color: #888;
+.arcade-footer {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+  margin-top: 2rem;
+}
+
+.arcade-footer p {
+  margin: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .arcade-title {
+    font-size: 2.5rem;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .arcade-container {
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .arcade-title {
+    font-size: 1.8rem;
+  }
+
+  .arcade-subtitle {
+    font-size: 0.6rem;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .arcade-footer {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .arcade-title {
+    font-size: 1.3rem;
+  }
+
+  .arcade-subtitle {
+    font-size: 0.5rem;
+  }
+
+  .games-grid {
+    padding: 0.5rem;
+  }
 }
